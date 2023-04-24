@@ -1,0 +1,158 @@
+$textColor: #d4d4d4;
+
+body {
+  margin: 0;
+  font-family: GameofThrones;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: black;
+
+  color: $textColor;
+}
+
+code {
+  font-family: GameofThrones,
+    monospace;
+}
+
+@font-face {
+  font-family: GameofThrones;
+  src: url("./font/GameofThrones.ttf");
+}
+
+a, a:visited {
+  color: $textColor;
+  text-decoration: none;
+  cursor: pointer;
+}
+.active {
+  text-decoration: underline;
+}
+
+ul {
+  text-decoration: none;
+  list-style-type: none;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  gap: 8px;
+  padding: 0;
+  
+  li {
+    font-size: 14px;
+    
+  }
+}
+
+.home {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  h1 {
+    font-size: 160px;
+    font-weight: 300;
+    padding: 0 40px;
+  }
+}
+.bg {
+  background-image: url("./img/throne_bg.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.middle {
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 40px;
+  width: 80vw;
+  margin: 0 auto;
+
+  &_nav {
+    display: flex;
+    gap: 10px;
+  }
+
+  &_searchbar {
+    color: white;
+    background-color: black;
+    outline: none;
+    border: none;
+    border-bottom: solid 1px white;
+    width: 33vw;
+    font-size: 15px;
+  }
+
+  .flecha {
+    font-size: 36px;
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: space-evenly;
+  //gap: 20px;
+  padding: 40px 0;
+  font-size: 36px;
+  width: 100vw;
+}
+
+.gallery {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+
+  &_card {
+    width: 248px;
+    min-height: 300px;
+    color: white;
+    position: relative;
+    margin: 0 auto;
+
+    img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      object-position: top;
+    }
+    img:hover + .gallery_card_name, .gallery_card_name:hover  {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    &_name {
+      width: 100%;
+      text-align: center;
+      position: absolute;
+      bottom: 0;
+      visibility: hidden;
+      padding: 20px 0;
+      background-color: rgba($color: #000000, $alpha: 0.7);
+      opacity: 0;
+      transition: opacity 0.2s linear, visibility 0.2s linear;
+    }
+  }
+  
+  &_tall {
+    min-height: 75vh;
+  }
+
+  &_details {
+    max-width: 200px;
+  }
+  
+}
+
+.simplebar-scrollbar::before {
+  background-color: white!important;
+}
