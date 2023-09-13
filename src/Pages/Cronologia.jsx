@@ -5,9 +5,7 @@ import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
-
-const url = "http://localhost:3000/";
-const urlChars = "http://localhost:3000/characters";
+import { url } from "../App";
 
 let order = "asc";
 let minmax = 0;
@@ -15,7 +13,7 @@ export default function Cronologia() {
     const [characters, setCharacters] = useState([]);
 
     useEffect(()=> {
-        axios.get(urlChars).then((res)=> {
+        axios.get(url+"/characters").then((res)=> {
             setCharacters(sort(res.data))
         })
     }, [])
@@ -43,7 +41,7 @@ export default function Cronologia() {
             { characters.map((data, index)=> <div key={index} className={ index%2 === 1 ? "container right" : "container left" } >
                 <p>{data.age}</p>
                 <h3>{data.name}</h3>
-                <img src={url + data.image} alt="" className="crono_img" />
+                <img src={data.image} alt="" className="crono_img" />
             </div>)}
         </div>
         </SimpleBar>

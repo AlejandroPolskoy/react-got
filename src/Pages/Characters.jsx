@@ -4,13 +4,9 @@ import Header from "../Components/Header";
 import { Card, Details } from "../Components/Cards";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { ContextLanguage, t } from "../App";
+import { ContextLanguage, t, url } from "../App";
 import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
-
-const url = "http://localhost:3000/";
-const urlChars = "http://localhost:3000/characters";
-//const urlHouses = "http://localhost:3000/houses";
 
 // buscador ?name_like=
 
@@ -19,7 +15,7 @@ export function Characters() {
     const {searching} = useContext(ContextLanguage);
 
     useEffect(()=> {
-        axios.get(urlChars).then((res)=> {
+        axios.get(url+"/characters").then((res)=> {
             setCharacters(res.data)
         })
     }, [])
@@ -43,14 +39,11 @@ export function CharacterDetails() {
     const {lang} = useContext(ContextLanguage);
 
     useEffect(()=> {
-        axios.get( urlChars + "/" + id ).then((res)=> {
-            //console.log( res );
+        axios.get( url + "/characters/" + id ).then((res)=> {
             // http://localhost:3000/houses?name_like=
-            axios.get( url + "houses?name_like=" + res.data.house ).then((resHouse)=> {
-                //console.log( resHouse );
-                res.data.house = resHouse.data[0]
-                setDetails(res.data)
-                //console.log( res.data );
+            axios.get( url + "/houses/find?name_like=" + res.data[0].house ).then((resHouse)=> {
+                res.data[0].house = resHouse.data[0]
+                setDetails(res.data[0])
             })
                 
             // house - casa
@@ -68,7 +61,7 @@ export function CharacterDetails() {
         <Header from={"/characters"} />
         <div className="middle">
             <div className="charDetails">
-                { details.image && <div className="gallery_card"><img src={url + details.image} alt=""/></div> }
+                { details.image && <div className="gallery_card"><img src={details.image} alt=""/></div> }
                 <h3>{details.name}</h3>
                 <div className="gallery">
                     <Details title={t[lang].house} item={details.house} />

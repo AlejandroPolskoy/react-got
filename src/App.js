@@ -6,6 +6,8 @@ import Cronologia from "./Pages/Cronologia";
 import { Casas, CasasDetails } from "./Pages/Casas";
 import React, { useState } from 'react';
 
+export const url = "https://got-api-tau.vercel.app";
+//export const url = "http://localhost:8000";
 export const ContextLanguage = React.createContext();
 export const t = {
   en: {

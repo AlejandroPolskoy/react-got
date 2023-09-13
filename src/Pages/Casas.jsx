@@ -4,20 +4,16 @@ import Header from "../Components/Header";
 import { Card, Details } from "../Components/Cards";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { ContextLanguage, t } from "../App";
+import { ContextLanguage, t, url } from "../App";
 import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
-
-
-const url = "http://localhost:3000/";
-const urlHouses = "http://localhost:3000/houses";
 
 export function Casas() {
     const [casas, setCasas] = useState([]);
     const {searching} = useContext(ContextLanguage);
 
     useEffect(()=> {
-        axios.get(urlHouses).then((res)=> {
+        axios.get(url + "/houses").then((res)=> {
             setCasas(res.data)
         })
     }, [])
@@ -41,8 +37,8 @@ export function CasasDetails() {
     const {lang} = useContext(ContextLanguage);
 
     useEffect(()=> {
-        axios.get(urlHouses+"/"+id).then((res)=> {
-            setCasas(res.data)
+        axios.get(url+"/houses/"+id).then((res)=> {
+            setCasas(res.data[0])
         })
     }, [])
 
@@ -50,7 +46,7 @@ export function CasasDetails() {
         <Header from={"/houses"}/>
         <div className="middle">
             <div className="charDetails">
-                { casas.image && <div className="gallery_card"><img src={url + casas.image} alt=""/></div> }
+                { casas.image && <div className="gallery_card"><img src={casas.image} alt=""/></div> }
                 <h3>{casas.name}</h3>
                 <div className="gallery">
                     <Details title={t[lang].settlement} item={casas.settlement} />
